@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./HomePage.module.scss";
-import DirectoryMenu from "../../components/DirectoryMenu/DirectoryMenu";
+import DirectoryMenu from "../../components/directory-menu/DirectoryMenu";
 
 const HomePage = () => {
   return (
