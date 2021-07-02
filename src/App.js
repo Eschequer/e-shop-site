@@ -8,7 +8,7 @@ import SignInAndSignOutPage from "./pages/sign-in-and-sign-out/SignInAndSignOutP
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
