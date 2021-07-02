@@ -29,3 +29,16 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .collectionItem {
+    width: 85%;
+
+    .price {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+
+}
