@@ -24,7 +24,3 @@ if (module.hot) {
 reportWebVitals();
 
 ///////////////////
-
-let num = 7;
-
-console.log(num, "num");

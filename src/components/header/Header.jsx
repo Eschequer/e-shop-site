@@ -12,6 +12,7 @@ const Header = () => {
       <div className={styles.options}>
         <Link to="/shop">SHOP</Link>
         <Link to="/contact">CONTACT US</Link>
+        <Link to="/sign-in">SIGN IN</Link>
       </div>
     </div>
   );
