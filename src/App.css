@@ -10,7 +10,8 @@ a {
 
 @media screen and (max-width: 768px) {
   html {
-    width: 95vw;
+    width: 92vw;
+    margin: auto;
   }
 
   body {
