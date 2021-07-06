@@ -11,17 +11,19 @@ a {
 }
 
 .app {
-  max-width: 90vw;
+  width: 90vw;
   margin: auto;
 }
 
 @media screen and (max-width: 768px) {
   body {
-    padding: 5px;
+    padding: 0;
   }
 
   .app {
-    min-width: 350px;
+    min-width: 300px;
+    width: 99vw;
+    margin: auto;
   }
 
 }
