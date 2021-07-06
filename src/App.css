@@ -21,7 +21,6 @@ a {
   }
 
   .app {
-    min-width: 300px;
     width: 99vw;
     margin: auto;
   }
