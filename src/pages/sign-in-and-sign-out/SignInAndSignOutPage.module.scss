@@ -1,0 +1,15 @@
+.signInAndSignUp {
+  width: 85vw;
+  display: flex;
+  justify-content: space-between;
+  margin: 30px auto;
+
+}
+
+@media screen and (max-width: 768px){
+  .signInAndSignUp {
+    flex-direction: column;
+    gap: 15px;
+    width: 99%;
+  }
+}

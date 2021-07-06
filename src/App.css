@@ -2,26 +2,26 @@ body {
   font-family: "Open Sans Condensed", sans-serif;
   padding: 20px 60px;
   border: none;
+
 }
+
 a {
   text-decoration: none;
   color: black;
 }
 
-@media screen and (max-width: 768px) {
-  html {
-    width: 99vw;
-    margin: auto;
-  }
+.app {
+  max-width: 90vw;
+  margin: auto;
+}
 
+@media screen and (max-width: 768px) {
   body {
     padding: 5px;
   }
 
   .app {
-    min-width: 300px;
+    min-width: 350px;
   }
+
 }
-
-
-

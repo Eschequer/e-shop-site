@@ -24,20 +24,39 @@
     align-items: center;
     justify-content: flex-end;
 
-    a {
+    a, .option {
       padding: 10px 15px;
       font-weight: bold;
       font-size: 1.2rem;
+      cursor: pointer;
     }
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 756px) {
+  .header {
+    width: 98%;
+
+    .options {
+      width: 95%;
+      margin: auto;
+
+      a, .option {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+
+}
+
+
+@media screen and (max-width: 576px) {
  .header {
    .options {
      width: 95%;
 
-     a {
+     a, .option {
        font-size: 0.9rem;
      }
    }
