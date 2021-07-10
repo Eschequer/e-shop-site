@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import styles from "./Header.module.scss";
 
+import { connect } from "react-redux";
+
 import { auth } from "../../firebase/firebase-utils";
 
 const Header = ({ currentUser }) => {
-  async function signOutHandler() {
+  async function handleSignOut() {
     await auth.signOut();
   }
 
@@ -19,7 +21,7 @@ const Header = ({ currentUser }) => {
         <Link to="/shop">SHOP</Link>
         <Link to="/contact">CONTACT US</Link>
         {currentUser ? (
-          <div className={styles.option} onClick={signOutHandler}>
+          <div className={styles.option} onClick={handleSignOut}>
             SIGN OUT
           </div>
         ) : (
@@ -30,4 +32,8 @@ const Header = ({ currentUser }) => {
   );
 };
 
-export default Header;
+function mapStateToProps(state) {
+  return { currentUser: state.user.currentUser };
+}
+
+export default connect(mapStateToProps)(Header);

@@ -7,13 +7,13 @@ import { auth, createUserProfileDocument } from "../../firebase/firebase-utils";
 class SignUp extends React.Component {
   state = { displayName: "", email: "", password: "", confirmPassword: "" };
 
-  inputChangeHandler = (e) => {
+  handleInputChange = (e) => {
     const { name, value } = e.target;
 
     this.setState({ [name]: value });
   };
 
-  submitHandler = async (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
     const { displayName, email, password, confirmPassword } = this.state;
@@ -48,12 +48,12 @@ class SignUp extends React.Component {
       <div className={styles.signUp}>
         <h2 className={styles.title}>Sign Up</h2>
         <span>Sign up with your email and password</span>
-        <form onSubmit={this.submitHandler}>
+        <form onSubmit={this.handleSubmit}>
           <FormInput
             type="text"
             name="displayName"
             value={this.state.displayName}
-            onChange={this.inputChangeHandler}
+            onChange={this.handleInputChange}
             label="Display Name"
             required
           />
@@ -61,7 +61,7 @@ class SignUp extends React.Component {
             type="email"
             name="email"
             value={this.state.email}
-            onChange={this.inputChangeHandler}
+            onChange={this.handleInputChange}
             label="Email"
             required
           />
@@ -69,7 +69,7 @@ class SignUp extends React.Component {
             type="password"
             name="password"
             value={this.state.password}
-            onChange={this.inputChangeHandler}
+            onChange={this.handleInputChange}
             label="Password"
             required
           />
@@ -77,7 +77,7 @@ class SignUp extends React.Component {
             type="password"
             name="confirmPassword"
             value={this.state.confirmPassword}
-            onChange={this.inputChangeHandler}
+            onChange={this.handleInputChange}
             label="Confirm Password"
             required
           />

@@ -15,7 +15,7 @@ class SignIn extends Component {
     };
   }
 
-  submitHandler = async (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
     const { email, password } = this.state;
@@ -29,7 +29,7 @@ class SignIn extends Component {
     this.setState({ email: "", password: "" });
   };
 
-  inputChangeHandler = (e) => {
+  handleInputChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
@@ -39,9 +39,9 @@ class SignIn extends Component {
       <div className={styles.signIn}>
         <h2>Sign In</h2>
         <span>Sign in with your email and password</span>
-        <form onSubmit={this.submitHandler}>
+        <form onSubmit={this.handleSubmit}>
           <FormInput
-            inputChangeHandler={this.inputChangeHandler}
+            inputChangeHandler={this.handleInputChange}
             label="email"
             name="email"
             type="email"
@@ -49,7 +49,7 @@ class SignIn extends Component {
             required
           />
           <FormInput
-            inputChangeHandler={this.inputChangeHandler}
+            inputChangeHandler={this.handleInputChange}
             label="password"
             type="password"
             name="password"
