@@ -1,0 +1,36 @@
+.cartIcon {
+  width: 45px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  svg {
+    width: 30px;
+    height: 30px;
+    stroke: black;
+    stroke-width: 0.3;
+  }
+
+  .itemCount {
+    position: absolute;
+    font-size: 10px;
+    font-weight: bold;
+    bottom: 12px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .cartIcon {
+
+    svg {
+      stroke: none;
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+
+}
