@@ -7,7 +7,10 @@ import { connect } from "react-redux";
 
 import { auth } from "../../firebase/firebase-utils";
 
-const Header = ({ currentUser }) => {
+import ShoppingCartDropdown from "../shopping-cart-dropdown/ShoppingCartDropdown";
+import ShoppingCartIcon from "../shopping-cart-icon/ShoppingCartIcon";
+
+const Header = ({ currentUser, shoppingCartIsHidden }) => {
   async function handleSignOut() {
     await auth.signOut();
   }
@@ -27,13 +30,18 @@ const Header = ({ currentUser }) => {
         ) : (
           <Link to="/sign-in">SIGN IN</Link>
         )}
+        <ShoppingCartIcon />
       </div>
+      {shoppingCartIsHidden && <ShoppingCartDropdown />}
     </div>
   );
 };
 
 function mapStateToProps(state) {
-  return { currentUser: state.user.currentUser };
+  return {
+    currentUser: state.user.currentUser,
+    shoppingCartIsHidden: state.shoppingCart.hidden,
+  };
 }
 
 export default connect(mapStateToProps)(Header);
