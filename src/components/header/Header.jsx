@@ -9,6 +9,9 @@ import { auth } from "../../firebase/firebase-utils";
 
 import ShoppingCartDropdown from "../shopping-cart-dropdown/ShoppingCartDropdown";
 import ShoppingCartIcon from "../shopping-cart-icon/ShoppingCartIcon";
+import { selectCurrentUser } from "../../redux/utils/userSelectors";
+import { selectShoppingCartHidden } from "../../redux/utils/ShoppingCartSelectors";
+import { createStructuredSelector } from "reselect";
 
 const Header = ({ currentUser, shoppingCartIsHidden }) => {
   async function handleSignOut() {
@@ -37,11 +40,9 @@ const Header = ({ currentUser, shoppingCartIsHidden }) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    currentUser: state.user.currentUser,
-    shoppingCartIsHidden: state.shoppingCart.hidden,
-  };
-}
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  shoppingCartIsHidden: selectShoppingCartHidden,
+});
 
 export default connect(mapStateToProps)(Header);
