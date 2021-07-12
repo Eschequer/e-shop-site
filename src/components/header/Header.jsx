@@ -32,7 +32,7 @@ const Header = ({ currentUser, shoppingCartIsHidden }) => {
         )}
         <ShoppingCartIcon />
       </div>
-      {shoppingCartIsHidden && <ShoppingCartDropdown />}
+      {!shoppingCartIsHidden && <ShoppingCartDropdown />}
     </div>
   );
 };
