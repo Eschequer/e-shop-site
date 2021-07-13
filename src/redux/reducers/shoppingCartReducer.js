@@ -1,5 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
-import { addItemToShoppingCart } from "../utils/shoppingCartUtils";
+import {
+  addItemToShoppingCart,
+  removeItem,
+  removeItemFromShoppingCart,
+} from "../utils/shoppingCartUtils";
 
 const INITIAL_STATE = { hidden: true, shoppingCartItems: [] };
 
@@ -17,6 +21,19 @@ export const shoppingCartReducer = (state = INITIAL_STATE, action) => {
           state.shoppingCartItems,
           action.payload
         ),
+      };
+    case actionTypes.CLEAR_ITEM_FROM_CART:
+      return {
+        ...state,
+        shoppingCartItems: removeItemFromShoppingCart(
+          state.shoppingCartItems,
+          action.payload
+        ),
+      };
+    case actionTypes.REMOVE_COLLECTION_ITEM:
+      return {
+        ...state,
+        shoppingCartItems: removeItem(state.shoppingCartItems, action.payload),
       };
     default:
       return state;

@@ -1,7 +1,18 @@
 import React from "react";
+import { connect } from "react-redux";
 import styles from "./CheckoutItem.module.scss";
+import {
+  removeCollectionItemFromCart,
+  addCollectionItemToCart,
+  removeCollectionItem,
+} from "../../redux/actions/shoppingCartActions";
 
-const CheckoutItem = ({ cartItem }) => {
+const CheckoutItem = ({
+  cartItem,
+  removeItem,
+  addItem,
+  removeItemFromCart,
+}) => {
   const { name, imageUrl, price, quantity } = cartItem;
 
   return (
@@ -10,11 +21,28 @@ const CheckoutItem = ({ cartItem }) => {
         <img src={imageUrl} alt="cart item" />
       </div>
       <span className={styles.name}>{name}</span>
-      <span className={styles.quantity}>{quantity}</span>
+      <div className={styles.quantity}>
+        <span className={styles.arrow} onClick={() => removeItem(cartItem)}>
+          &#10094;
+        </span>
+        {quantity}
+        <span className={styles.arrow} onClick={() => addItem(cartItem)}>
+          &#10095;
+        </span>
+      </div>
       <span className={styles.price}>{price}</span>
-      <div className={styles.removeButton}>&#10005;</div>
+      <div
+        className={styles.removeButton}
+        onClick={() => removeItemFromCart(cartItem)}
+      >
+        &#10005;
+      </div>
     </div>
   );
 };
 
-export default CheckoutItem;
+export default connect(null, {
+  removeItemFromCart: removeCollectionItemFromCart,
+  removeItem: removeCollectionItem,
+  addItem: addCollectionItemToCart,
+})(CheckoutItem);

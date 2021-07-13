@@ -23,7 +23,12 @@
   }
 
   .quantity {
-    padding-left: 20px;
+
+    .arrow {
+      padding: 0 4px;
+      cursor: pointer;
+    }
+
   }
 
   .removeButton {
@@ -35,7 +40,9 @@
 @media screen and (max-width: 768px) {
   .checkoutItem {
     width: 100%;
-    font-size: 17px;
+    font-size: 14px;
+    justify-content: space-between;
+
 
     .imageContainer {
       width: 23%;
@@ -46,20 +53,11 @@
         height: 100%;
       }
     }
-    .name,
-    .quantity,
-    .price {
-      text-align: center;
-      width: 20%;
 
-    }
 
-    .quantity {
-      padding-left: 0;
-    }
 
     .removeButton {
-      padding-left: 12px;
+      padding-right: 12px;
       cursor: pointer;
     }
   }
