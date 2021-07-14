@@ -10,19 +10,31 @@ import MenuItem from "../menu-item/MenuItem";
 class DirectoryMenu extends React.Component {
   state = {
     sections: [
-      { title: "Jackets", image: jackets, id: 1 },
-      { title: "Hats", image: hats, id: 2 },
-      { title: "Shoes", image: shoes, id: 3 },
-      { title: "Men", image: men, size: "large", id: 4 },
-      { title: "Women", image: women, size: "large", id: 5 },
+      { title: "jackets", image: jackets, id: 1, linkUrl: "shop/jackets" },
+      { title: "hats", image: hats, id: 2, linkUrl: "shop/hats" },
+      { title: "shoes", image: shoes, id: 3, linkUrl: "shop/shoes" },
+      { title: "men", image: men, size: "large", id: 4, linkUrl: "shop/men" },
+      {
+        title: "women",
+        image: women,
+        size: "large",
+        id: 5,
+        linkUrl: "shop/women",
+      },
     ],
   };
 
   render() {
     return (
       <div className={styles.directoryMenu}>
-        {this.state.sections.map(({ title, image, id, size }) => (
-          <MenuItem title={title} key={id} image={image} size={size} />
+        {this.state.sections.map(({ title, image, id, size, linkUrl }) => (
+          <MenuItem
+            title={title}
+            key={id}
+            image={image}
+            size={size}
+            linkUrl={linkUrl}
+          />
         ))}
       </div>
     );
