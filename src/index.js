@@ -35,3 +35,5 @@ if (module.hot) {
 reportWebVitals();
 
 ///////////////////
+
+document.cookie = "ab_disable_remember_me=control; Secure; SameSite=None";
