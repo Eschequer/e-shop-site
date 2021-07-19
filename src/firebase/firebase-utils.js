@@ -39,11 +39,48 @@ export async function createUserProfileDocument(userAuth, additionalData) {
   return userRef;
 }
 
+export async function addCollectionAndDocuments(
+  collectionKey,
+  documentObjects
+) {
+  const collectionRef = firestore.collection(collectionKey);
+
+  // eslint-disable-next-line no-unused-vars
+  const batch = firestore.batch();
+
+  documentObjects.forEach((doc) => {
+    const docRef = collectionRef.doc();
+
+    batch.set(docRef, doc);
+  });
+
+  return await batch.commit();
+}
+
+export function addDataToCollectionSnapshot(collectionSnapshot) {
+  const transformedCollection = collectionSnapshot.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return {
+      id: doc.id,
+      routeName: encodeURI(title.toLowerCase()),
+      title,
+      items,
+    };
+  });
+
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+
+    return accumulator;
+  }, {});
+}
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 
-const firestore = firebase.firestore();
+export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
