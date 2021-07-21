@@ -18,3 +18,8 @@ export const findShopCollectionByPathName = (pathName) => {
     collections ? collections[pathName] : null
   );
 };
+
+export const selectIsCollectionsFetching = createSelector(
+  selectShop,
+  (shop) => shop.isFetching
+);

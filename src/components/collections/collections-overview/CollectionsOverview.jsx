@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { selectShopCollectionsForPreview } from "../../../redux/utils/shopSelectors";
 
 const CollectionsOverview = ({ collections, history }) => {
+  if (!collections.length) return null;
+
   return (
     <div className={styles.collectionsOverview}>
       {collections.map(({ id, ...otherCollectionProps }) => (

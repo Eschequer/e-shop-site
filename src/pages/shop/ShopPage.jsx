@@ -1,40 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
 import styles from "./ShopPage.module.scss";
-import CollectionsOverview from "../../components/collections/collections-overview/CollectionsOverview";
+
 import { Route } from "react-router-dom";
-import CollectionPage from "../collection/CollectionPage";
-import {
-  firestore,
-  addDataToCollectionSnapshot,
-} from "../../firebase/firebase-utils";
 
-import { updateCollections } from "../../redux/actions/shopActions";
-import withSpinner from "../../components/with-spinner/withSpinner";
+import CollectionPageContainer from "../collection/CollectionPageContainer";
+import CollectionsOverviewContainer from "../../components/collections/collections-overview/CollectionsOverviewContainer";
 
-const CollectionsOverviewWithSpinner = withSpinner(CollectionsOverview);
-const CollectionPageWithSpinner = withSpinner(CollectionPage);
+import { updateCollectionsAsync } from "../../redux/actions/shopActions";
 
 class ShopPage extends React.Component {
-  state = { isLoading: true };
-
-  unsubscribeFromSnapshot = null;
-
   componentDidMount() {
-    const collectionReference = firestore.collection("collections");
+    /*const collectionReference = firestore.collection("collections");
 
     this.unsubscribeFromSnapshot = collectionReference.onSnapshot(
       (snapshot) => {
         const collections = addDataToCollectionSnapshot(snapshot);
-        this.props.updateCollections(collections);
+        this.props.updateCollections(collections)
 
         this.setState({ isLoading: false });
       }
-    );
-  }
+    );*/
 
-  componentWillUnmount() {
-    this.unsubscribeFromSnapshot();
+    this.props.updateCollectionsAsync();
   }
 
   render() {
@@ -45,25 +33,15 @@ class ShopPage extends React.Component {
         <Route
           exact
           path={match.path}
-          render={(props) => (
-            <CollectionsOverviewWithSpinner
-              isLoading={this.state.isLoading}
-              {...props}
-            />
-          )}
+          component={CollectionsOverviewContainer}
         />
         <Route
           path={match.path + "/:collectionId"}
-          render={(props) => (
-            <CollectionPageWithSpinner
-              isLoading={this.state.isLoading}
-              {...props}
-            />
-          )}
+          component={CollectionPageContainer}
         />
       </div>
     );
   }
 }
 
-export default connect(null, { updateCollections })(ShopPage);
+export default connect(null, { updateCollectionsAsync })(ShopPage);
