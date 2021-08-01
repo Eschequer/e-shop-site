@@ -7,22 +7,11 @@ import { Route } from "react-router-dom";
 import CollectionPageContainer from "../collection/CollectionPageContainer";
 import CollectionsOverviewContainer from "../../components/collections/collections-overview/CollectionsOverviewContainer";
 
-import { updateCollectionsAsync } from "../../redux/actions/shopActions";
+import { startFetchingCollections } from "../../redux/actions/shopActions";
 
 class ShopPage extends React.Component {
   componentDidMount() {
-    /*const collectionReference = firestore.collection("collections");
-
-    this.unsubscribeFromSnapshot = collectionReference.onSnapshot(
-      (snapshot) => {
-        const collections = addDataToCollectionSnapshot(snapshot);
-        this.props.updateCollections(collections)
-
-        this.setState({ isLoading: false });
-      }
-    );*/
-
-    this.props.updateCollectionsAsync();
+    this.props.startFetchingCollections();
   }
 
   render() {
@@ -44,4 +33,4 @@ class ShopPage extends React.Component {
   }
 }
 
-export default connect(null, { updateCollectionsAsync })(ShopPage);
+export default connect(null, { startFetchingCollections })(ShopPage);

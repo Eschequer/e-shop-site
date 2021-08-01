@@ -5,16 +5,15 @@ import HomePage from "./pages/home/HomePage";
 import ShopPage from "./pages/shop/ShopPage";
 import Header from "./components/header/Header";
 import SignInAndSignOutPage from "./pages/sign-in-and-sign-out/SignInAndSignOutPage";
-import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
 
 import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/actions/userActions";
 import { selectCurrentUser } from "./redux/utils/userSelectors";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
+import { checkUserSession } from "./redux/actions/userActions";
 
 class App extends React.Component {
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
+    /*this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const userRef = await createUserProfileDocument(user);
 
@@ -27,11 +26,15 @@ class App extends React.Component {
       }
 
       this.props.setCurrentUser(user);
-    });
+    });*/
+
+    const { checkUserSession } = this.props;
+
+    checkUserSession();
   }
 
   componentWillUnmount() {
-    this.unsubscribeFromAuth();
+    /* this.unsubscribeFromAuth();*/
   }
 
   render() {
@@ -56,8 +59,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return { setCurrentUser: (user) => dispatch(setCurrentUser(user)) };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, { checkUserSession })(App);
