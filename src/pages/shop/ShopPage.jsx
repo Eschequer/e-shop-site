@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import styles from "./ShopPage.module.scss";
 
@@ -9,28 +9,20 @@ import CollectionsOverviewContainer from "../../components/collections/collectio
 
 import { startFetchingCollections } from "../../redux/actions/shopActions";
 
-class ShopPage extends React.Component {
-  componentDidMount() {
-    this.props.startFetchingCollections();
-  }
+const ShopPage = ({ startFetchingCollections, match }) => {
+  useEffect(() => {
+    startFetchingCollections();
+  }, [startFetchingCollections]);
 
-  render() {
-    let { match } = this.props;
-
-    return (
-      <div className={styles.shopPage}>
-        <Route
-          exact
-          path={match.path}
-          component={CollectionsOverviewContainer}
-        />
-        <Route
-          path={match.path + "/:collectionId"}
-          component={CollectionPageContainer}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.shopPage}>
+      <Route exact path={match.path} component={CollectionsOverviewContainer} />
+      <Route
+        path={match.path + "/:collectionId"}
+        component={CollectionPageContainer}
+      />
+    </div>
+  );
+};
 
 export default connect(null, { startFetchingCollections })(ShopPage);

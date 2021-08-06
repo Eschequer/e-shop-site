@@ -33,6 +33,7 @@ export function* signInWithGoogle() {
 
     yield getSnapshotFromUser(user);
   } catch (error) {
+    console.log(error);
     yield put(signInFailure(error));
   }
 }

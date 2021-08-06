@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/home/HomePage";
@@ -11,47 +11,24 @@ import { selectCurrentUser } from "./redux/utils/userSelectors";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
 import { checkUserSession } from "./redux/actions/userActions";
 
-class App extends React.Component {
-  componentDidMount() {
-    /*this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        const userRef = await createUserProfileDocument(user);
-
-        return userRef.onSnapshot((docSnapshot) => {
-          this.props.setCurrentUser({
-            id: docSnapshot.id,
-            ...docSnapshot.data(),
-          });
-        });
-      }
-
-      this.props.setCurrentUser(user);
-    });*/
-
-    const { checkUserSession } = this.props;
-
+const App = ({ checkUserSession, currentUser }) => {
+  useEffect(() => {
     checkUserSession();
-  }
+  }, [checkUserSession]);
 
-  componentWillUnmount() {
-    /* this.unsubscribeFromAuth();*/
-  }
-
-  render() {
-    return (
-      <div className="app">
-        <Header />
-        <Switch>
-          {this.props.currentUser && <Redirect strict from="/sign-in" to="/" />}
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckoutPage} />
-          <Route exact path="/sign-in" component={SignInAndSignOutPage} />
-        </Switch>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="app">
+      <Header />
+      <Switch>
+        {currentUser && <Redirect strict from="/sign-in" to="/" />}
+        <Route exact path="/" component={HomePage} />
+        <Route path="/shop" component={ShopPage} />
+        <Route exact path="/checkout" component={CheckoutPage} />
+        <Route exact path="/sign-in" component={SignInAndSignOutPage} />
+      </Switch>
+    </div>
+  );
+};
 
 function mapStateToProps(state) {
   return {

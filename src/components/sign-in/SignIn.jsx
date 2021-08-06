@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import styles from "./SignIn.module.scss";
 import FormInput from "../form-input/FormInput";
@@ -8,70 +8,64 @@ import {
   googleSignInStart,
 } from "../../redux/actions/userActions";
 
-class SignIn extends Component {
-  constructor(props) {
-    super(props);
+const SignIn = (props) => {
+  const [userCredentials, setUserCredentials] = useState({
+    email: "",
+    password: "",
+  });
 
-    this.state = {
-      email: "",
-      password: "",
-    };
-  }
+  const { email, password } = userCredentials;
 
-  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { email, password } = this.state;
-    const { startSigningInWithEmail } = this.props;
+    props.startSigningInWithEmail({ email, password });
 
-    startSigningInWithEmail({ email, password });
-
-    this.setState({ email: "", password: "" });
+    setUserCredentials({ email: "", password: "" });
   };
 
-  handleInputChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+
+    setUserCredentials({ ...userCredentials, [name]: value });
   };
 
-  render() {
-    return (
-      <div className={styles.signIn}>
-        <h2>Sign In</h2>
-        <span>Sign in with your email and password</span>
-        <form onSubmit={this.handleSubmit}>
-          <FormInput
-            inputChangeHandler={this.handleInputChange}
-            label="email"
-            name="email"
-            type="email"
-            value={this.state.email}
-            required
-          />
-          <FormInput
-            inputChangeHandler={this.handleInputChange}
-            label="password"
-            type="password"
-            name="password"
-            value={this.state.password}
-            required
-          />
+  return (
+    <div className={styles.signIn}>
+      <h2>Sign In</h2>
+      <span>Sign in with your email and password</span>
+      <form onSubmit={handleSubmit}>
+        <FormInput
+          inputChangeHandler={handleInputChange}
+          label="email"
+          name="email"
+          type="email"
+          value={email}
+          required
+        />
+        <FormInput
+          inputChangeHandler={handleInputChange}
+          label="password"
+          type="password"
+          name="password"
+          value={password}
+          required
+        />
 
-          <div className={styles.buttons}>
-            <CustomButton type="submit">Sign In</CustomButton>
-            <CustomButton
-              type="button"
-              onClick={this.props.startSigningInWithGoogle}
-              isGoogleSignIn
-            >
-              Sign in with Google
-            </CustomButton>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+        <div className={styles.buttons}>
+          <CustomButton type="submit">Sign In</CustomButton>
+          <CustomButton
+            type="button"
+            onClick={props.startSigningInWithGoogle}
+            isGoogleSignIn
+          >
+            Sign in with Google
+          </CustomButton>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default connect(null, {
   startSigningInWithGoogle: googleSignInStart,

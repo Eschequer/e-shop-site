@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import styles from "./SignUp.module.scss";
 import FormInput from "../form-input/FormInput";
 import CustomButton from "../custom-button/CustomButton";
 import { signUpStart } from "../../redux/actions/userActions";
 
-class SignUp extends React.Component {
-  state = { displayName: "", email: "", password: "", confirmPassword: "" };
+const SignUp = (props) => {
+  const [userCredentials, setUserCredentials] = useState({
+    displayName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  handleInputChange = (e) => {
+  const { displayName, email, password, confirmPassword } = userCredentials;
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    this.setState({ [name]: value });
+    setUserCredentials({ ...userCredentials, [name]: value });
   };
 
-  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const startSigningUp = this.props.startSigningUp;
-
-    const { displayName, email, password, confirmPassword } = this.state;
+    const startSigningUp = props.startSigningUp;
 
     if (password !== confirmPassword) {
       alert("Passwords do not match");
@@ -28,7 +33,7 @@ class SignUp extends React.Component {
 
     startSigningUp({ email, password, displayName });
 
-    this.setState({
+    setUserCredentials({
       displayName: "",
       email: "",
       password: "",
@@ -36,49 +41,47 @@ class SignUp extends React.Component {
     });
   };
 
-  render() {
-    return (
-      <div className={styles.signUp}>
-        <h2 className={styles.title}>Sign Up</h2>
-        <span>Sign up with your email and password</span>
-        <form onSubmit={this.handleSubmit}>
-          <FormInput
-            type="text"
-            name="displayName"
-            value={this.state.displayName}
-            onChange={this.handleInputChange}
-            label="Display Name"
-            required
-          />
-          <FormInput
-            type="email"
-            name="email"
-            value={this.state.email}
-            onChange={this.handleInputChange}
-            label="Email"
-            required
-          />
-          <FormInput
-            type="password"
-            name="password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-            label="Password"
-            required
-          />
-          <FormInput
-            type="password"
-            name="confirmPassword"
-            value={this.state.confirmPassword}
-            onChange={this.handleInputChange}
-            label="Confirm Password"
-            required
-          />
-          <CustomButton type="submit">SIGN UP</CustomButton>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.signUp}>
+      <h2 className={styles.title}>Sign Up</h2>
+      <span>Sign up with your email and password</span>
+      <form onSubmit={handleSubmit}>
+        <FormInput
+          type="text"
+          name="displayName"
+          value={displayName}
+          onChange={handleInputChange}
+          label="Display Name"
+          required
+        />
+        <FormInput
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleInputChange}
+          label="Email"
+          required
+        />
+        <FormInput
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleInputChange}
+          label="Password"
+          required
+        />
+        <FormInput
+          type="password"
+          name="confirmPassword"
+          value={confirmPassword}
+          onChange={handleInputChange}
+          label="Confirm Password"
+          required
+        />
+        <CustomButton type="submit">SIGN UP</CustomButton>
+      </form>
+    </div>
+  );
+};
 
 export default connect(null, { startSigningUp: signUpStart })(SignUp);
