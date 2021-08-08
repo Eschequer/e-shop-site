@@ -23,7 +23,7 @@ const Header = ({ currentUser, shoppingCartIsHidden, signOutStart }) => {
         <Link to="/contact">CONTACT US</Link>
         {currentUser ? (
           <div className={styles.option} onClick={signOutStart}>
-            <a>SIGN OUT</a>
+            <button>SIGN OUT</button>
           </div>
         ) : (
           <Link to="/sign-in">SIGN IN</Link>

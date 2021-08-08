@@ -24,11 +24,14 @@
     align-items: center;
     justify-content: flex-end;
 
-    a, .option {
+    a, .option, button {
       padding: 10px 15px;
       font-weight: bold;
       font-size: 1.2rem;
       cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
     }
   }
 }
