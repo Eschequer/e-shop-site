@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import { selectCurrentUser } from "./redux/utils/userSelectors";
 import { checkUserSession } from "./redux/actions/userActions";
 import Header from "./components/header/Header";
-import HomePage from "./pages/home/HomePage";
 import ErrorBoundary from "./components/error-boundary/ErrorBoundary";
 
+const HomePage = lazy(() => import("./pages/home/HomePage"));
 const ShopPage = lazy(() => import("./pages/shop/ShopPage"));
 const SignInAndSignOutPage = lazy(() =>
   import("./pages/sign-in-and-sign-out/SignInAndSignOutPage")
@@ -25,8 +25,8 @@ const App = ({ checkUserSession, currentUser }) => {
       <Switch>
         {currentUser && <Redirect strict from="/sign-in" to="/" />}
         <ErrorBoundary>
-          <Route exact path="/" component={HomePage} />
           <Suspense fallback={<div>Loading...</div>}>
+            <Route exact path="/" component={HomePage} />
             <Route path="/shop" component={ShopPage} />
             <Route exact path="/checkout" component={CheckoutPage} />
             <Route exact path="/sign-in" component={SignInAndSignOutPage} />
