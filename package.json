@@ -1,6 +1,9 @@
 {
   "name": "clothing-shop-server",
   "version": "1.0.0",
+  "engines": {
+    "node": "15.14.0"
+  },
   "scripts": {
     "client": "npm start --prefix client",
     "server": "nodemon server.js",
